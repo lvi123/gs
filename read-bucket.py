@@ -12,8 +12,9 @@ while 1:
   try:
     now = time.time()
     contents = uri.get_key().get_contents_as_string()
-    skew = now - float(contents)
-    print now, contents, skew
+    (timestamp, data) = contents.split(' ')
+    skew = now - float(timestamp)
+    print now, timestamp, skew
   except boto.exception.GSResponseError, e:
     print 'Failed to read bucket:', e.status
 
